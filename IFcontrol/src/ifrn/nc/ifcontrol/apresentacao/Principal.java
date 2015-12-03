@@ -23,6 +23,13 @@ import javax.swing.JCheckBox;
 import javax.swing.JScrollPane;
 import javax.swing.JComboBox;
 import javax.swing.JSpinner;
+import javax.swing.JButton;
+
+import socket.Cliente;
+
+import java.awt.event.ActionEvent;
+import java.awt.Font;
+import java.net.Socket;
 
 public class Principal {
 
@@ -82,10 +89,16 @@ public class Principal {
 		panel.setBounds(10, 11, 1336, 398);
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);
-
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(0, 0, 1336, 398);
-		panel.add(scrollPane);
+		
+		JButton btnEnviar = new JButton("Enviar");
+		btnEnviar.setBounds(101, 131, 89, 23);
+		panel.add(btnEnviar);
+		btnEnviar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				Socket s = new Socket();
+			}
+		});
 
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(Color.LIGHT_GRAY);
@@ -93,12 +106,11 @@ public class Principal {
 		frame.getContentPane().add(panel_1);
 		panel_1.setLayout(null);
 
-		String[] listOnOff = { "Liga", "Delisga" };
+		String[] listOnOff = { "Liga", "Desliga" };
 		JComboBox ComboBox = new JComboBox(listOnOff);
 		ComboBox.setBounds(184, 60, 75, 20);
 		panel_1.add(ComboBox);
-	
-        String [] temp = {"16", "17", "18"};
+
 		JSpinner spinner = new JSpinner();
 		spinner.setBounds(120, 60, 44, 20);
 		panel_1.add(spinner);
