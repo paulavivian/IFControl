@@ -1,5 +1,7 @@
 package ifrn.nc.ifcontrol.apresentacao;
 
+import ifrn.nc.ifcontrol.socket.Cliente;
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -24,8 +26,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JComboBox;
 import javax.swing.JSpinner;
 import javax.swing.JButton;
-
-import socket.Cliente;
 
 import java.awt.event.ActionEvent;
 import java.awt.Font;
