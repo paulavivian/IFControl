@@ -3,43 +3,26 @@ package socket;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.net.Socket;
+import java.util.Scanner;
 
 public class Cliente {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 
-		// Declaro o socket cliente
-		Socket s = null;
+		Socket cliente = new Socket("127.0.0.1", 3320);
+		System.out.println("O cliente se conectou ao servidor!");
 
-		// Declaro a Stream de saida de dados
-		PrintStream ps = null;
+		Scanner teclado = new Scanner(System.in);
+		PrintStream saida = new PrintStream(cliente.getOutputStream());
 
-		try {
-
-			String x = "conexão bem sucedidade"
-					+ " ";
-			// Cria o socket com o recurso desejado na porta especificada
-			s = new Socket("127.0.0.1", 7000);
-
-			// Cria a Stream de saida de dados
-			ps = new PrintStream(s.getOutputStream());
-
-			// Imprime uma linha para a stream de saída de dados
-			ps.println(x);
-		} catch (IOException e) {
-			System.out
-					.println("Erro");
-		} finally {
-
-			try {
-
-				// Encerra o socket cliente
-				s.close();
-
-			} catch (IOException e) {
-			}
-
+		while (teclado.hasNextLine()) {
+			saida.println(teclado.nextLine());
 		}
+		saida.close();
+		teclado.close();
+		cliente.close();
+
+		System.out.println("Fechou");
 
 	}
 }

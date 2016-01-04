@@ -1,35 +1,22 @@
 package ifrn.nc.ifcontrol.apresentacao;
 
-import ifrn.nc.ifcontrol.socket.Cliente;
-
+import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Frame;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.net.Socket;
 
+import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-
-import java.awt.Frame;
-
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-
-import java.awt.Color;
-
-import javax.swing.JCheckBoxMenuItem;
-import javax.swing.JRadioButton;
-
-import java.awt.BorderLayout;
-import java.awt.event.ActionListener;
-
-import javax.swing.JCheckBox;
-import javax.swing.JScrollPane;
-import javax.swing.JComboBox;
 import javax.swing.JSpinner;
-import javax.swing.JButton;
-
-import java.awt.event.ActionEvent;
-import java.awt.Font;
-import java.net.Socket;
 
 public class Principal {
 
@@ -89,14 +76,32 @@ public class Principal {
 		panel.setBounds(10, 11, 1336, 398);
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);
-		
-		JButton btnEnviar = new JButton("Enviar");
-		btnEnviar.setBounds(101, 131, 89, 23);
+
+		JButton btnEnviar = new JButton("Liga/Desliga");
+		btnEnviar.setBounds(101, 131, 124, 41);
 		panel.add(btnEnviar);
+
+		JButton btnNewButton = new JButton("Testar conexão" + "");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					Socket cliente = new Socket("127.0.0.1", 3320);
+					JOptionPane
+							.showMessageDialog(null, "Conexão bem sucedida!");
+				} catch (IOException e) {
+					JOptionPane.showMessageDialog(null,
+							"Servidor não responde!");
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+			}
+		});
+		btnNewButton.setBounds(61, 270, 141, 58);
+		panel.add(btnNewButton);
 		btnEnviar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
-				Socket s = new Socket();
+
 			}
 		});
 

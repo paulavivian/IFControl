@@ -1,63 +1,31 @@
 package socket;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Scanner;
 
 public class Servidor {
 
-	public static void main(String[] args) {
-
-		// Declaro o ServerSocket
-		ServerSocket serv = null;
-
-		// Declaro o Socket de comunicação
-		Socket s = null;
-
-		// Declaro o leitor para a entrada de dados
-		BufferedReader entrada = null;
-
+	public static void main(String args[]) {
 		try {
 
-			// Cria o ServerSocket na porta 7000 se estiver disponível
-			serv = new ServerSocket(7000);
-
-			// Aguarda uma conexão na porta especificada e cria retorna o socket
-			// que irá comunicar com o cliente
-			s = serv.accept();
-
-			// Cria um BufferedReader para o canal da stream de entrada de dados
-			// do socket s
-			entrada = new BufferedReader(new InputStreamReader(
-					s.getInputStream()));
-
-			// Aguarda por algum dado e imprime a linha recebida quando recebe
-			System.out.println(entrada.readLine());
-
-			// trata possíveis excessões de input/output. Note que as excessões
-			// são as mesmas utilizadas para as classes de java.io
-		} catch (IOException e) {
-
-			// Imprime uma notificação na saída padrão caso haja algo errado.
-			System.out
-					.println("Algum problema ocorreu para criar ou receber o socket.");
-
-		} finally {
-
-			try {
-
-				// Encerro o socket de comunicação
-				s.close();
-
-				// Encerro o ServerSocket
-				serv.close();
-
-			} catch (IOException e) {
+			ServerSocket server = new ServerSocket(3320);
+			System.out.println("Servidor iniciado na porta 3320");
+			while (true) {
+				Socket cliente = server.accept();
+				System.out.println("Cliente conectado do IP "
+						+ cliente.getInetAddress().getHostAddress());
+				Scanner entrada = new Scanner(cliente.getInputStream());
+				while (entrada.hasNextLine()) {
+					System.out.println(entrada.nextLine());
+				}
+				cliente.close();
+				entrada.close();
 			}
+		} catch (IOException ex) {
+			System.out.println("Erro no servidor!");
 		}
 
 	}
-}
 }
