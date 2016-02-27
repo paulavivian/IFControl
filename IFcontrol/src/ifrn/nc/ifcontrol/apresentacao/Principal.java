@@ -81,6 +81,7 @@ public class Principal {
 
 		JMenuItem mntmSair = new JMenuItem("Sair");
 		mnGerenciar.add(mntmSair);
+	
 		
 		JMenuItem cadastrar = new JMenuItem("cadastrar");
 		
