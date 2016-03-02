@@ -11,6 +11,7 @@ import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import java.awt.Color;
 import javax.swing.JButton;
+import java.awt.Dialog.ModalExclusionType;
 
 public class Login extends JFrame {
 
@@ -38,7 +39,10 @@ public class Login extends JFrame {
 	 * Create the frame.
 	 */
 	public Login() {
+		setVisible(true);
+		setModalExclusionType(ModalExclusionType.APPLICATION_EXCLUDE);
 		setResizable(false);
+		
 
 		setTitle("IF AR-CONTROL");
 

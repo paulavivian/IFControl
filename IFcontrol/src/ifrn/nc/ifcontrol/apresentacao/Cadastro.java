@@ -1,5 +1,8 @@
 package ifrn.nc.ifcontrol.apresentacao;
 
+import ifrn.nc.ifcontrol.negocio.Usuario;
+import ifrn.nc.ifcontrol.persistencia.UsuarioDAO;
+
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 
@@ -16,12 +19,15 @@ import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import javax.swing.JComboBox;
 
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
 public class Cadastro extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
-	private JTextField textField;
-	private JTextField textField_1;
-	private JPasswordField passwordField;
+	private JTextField textUsuario;
+	private JTextField textMatricula;
+	private JPasswordField textSenha;
 	private JPasswordField passwordField_1;
 
 	/**
@@ -32,6 +38,7 @@ public class Cadastro extends JDialog {
 			Cadastro dialog = new Cadastro();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -43,6 +50,8 @@ public class Cadastro extends JDialog {
 	public Cadastro() {
 		setBounds(100, 100, 450, 392);
 		setLocationRelativeTo(null);
+		setResizable(false);
+		setModal(true);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -84,16 +93,16 @@ public class Cadastro extends JDialog {
 				panel.add(lblSenhaAdm);
 			}
 			{
-				textField = new JTextField();
-				textField.setBounds(120, 28, 140, 20);
-				panel.add(textField);
-				textField.setColumns(10);
+				textUsuario = new JTextField();
+				textUsuario.setBounds(120, 28, 140, 20);
+				panel.add(textUsuario);
+				textUsuario.setColumns(10);
 			}
 			{
-				textField_1 = new JTextField();
-				textField_1.setBounds(120, 66, 140, 20);
-				panel.add(textField_1);
-				textField_1.setColumns(10);
+				textMatricula = new JTextField();
+				textMatricula.setBounds(120, 66, 140, 20);
+				panel.add(textMatricula);
+				textMatricula.setColumns(10);
 			}
 			{
 				JLabel lblSenha = new JLabel("Senha");
@@ -102,9 +111,9 @@ public class Cadastro extends JDialog {
 				panel.add(lblSenha);
 			}
 			{
-				passwordField = new JPasswordField();
-				passwordField.setBounds(120, 97, 140, 20);
-				panel.add(passwordField);
+				textSenha = new JPasswordField();
+				textSenha.setBounds(120, 97, 140, 20);
+				panel.add(textSenha);
 			}
 			{
 				passwordField_1 = new JPasswordField();
@@ -122,6 +131,22 @@ public class Cadastro extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton okButton = new JButton("Cadastrar");
+				okButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						Usuario u = new Usuario();
+						
+						u.setNome(textUsuario.getText());
+						u.setMatricula(textMatricula.getText());
+						u.setSenha(textSenha.getText());
+						UsuarioDAO ud = new UsuarioDAO();
+						ud.Inserir(u);
+						
+			
+						
+						
+						
+					}
+				});
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);

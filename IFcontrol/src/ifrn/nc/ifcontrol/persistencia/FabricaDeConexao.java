@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public class FabricaDeConexao {
 	private String driverClassName = "com.mysql.jdbc.Driver";
-	private String connectionUrl = "jdbc:mysql://localhost:3306/Ifcontrol";
+	private String connectionUrl = "jdbc:mysql://localhost:3306/IfCONTROL";
 	private String dbUser = "root";
 	private String dbPwd = "root";
 
