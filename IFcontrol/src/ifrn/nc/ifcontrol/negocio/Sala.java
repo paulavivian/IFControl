@@ -2,25 +2,25 @@ package ifrn.nc.ifcontrol.negocio;
 
 public class Sala {
 
-	private int id;
+	private String ip;
 	private String nome;
 
 	public Sala() {
 
 	}
 
-	public Sala(int id, String nome) {
+	public Sala(String ip, String nome) {
 		super();
-		this.id = id;
+		this.ip = ip;
 		this.nome = nome;
 	}
 
-	public int getId() {
-		return id;
+	public String getIp() {
+		return ip;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setIp(String ip) {
+		this.ip = ip;
 	}
 
 	public String getNome() {

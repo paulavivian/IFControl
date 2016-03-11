@@ -22,7 +22,7 @@ import javax.swing.JComboBox;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class Cadastro extends JDialog {
+public class CadastroUsuario extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JTextField textUsuario;
@@ -35,7 +35,7 @@ public class Cadastro extends JDialog {
 	 */
 	public static void main(String[] args) {
 		try {
-			Cadastro dialog = new Cadastro();
+			CadastroUsuario dialog = new CadastroUsuario();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 			
@@ -47,7 +47,7 @@ public class Cadastro extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public Cadastro() {
+	public CadastroUsuario() {
 		setBounds(100, 100, 450, 392);
 		setLocationRelativeTo(null);
 		setResizable(false);

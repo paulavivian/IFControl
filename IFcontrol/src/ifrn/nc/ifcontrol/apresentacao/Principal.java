@@ -1,42 +1,62 @@
 package ifrn.nc.ifcontrol.apresentacao;
 
+import ifrn.nc.ifcontrol.apresentacao.table.SalaTableModel;
+import ifrn.nc.ifcontrol.negocio.Sala;
+import ifrn.nc.ifcontrol.persistencia.SalaDAO;
+
 import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Font;
 import java.awt.Frame;
-import java.awt.PopupMenu;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
+import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
-import javax.swing.Popup;
-import javax.swing.JLabel;
-
-import java.awt.Font;
+import javax.swing.JTable;
 
 public class Principal {
 
 	private JFrame frame;
 
 	private Socket cliente;
+	private JTable table;
 
 	// ===============================================//
 	public void iniciarCliente(String ip, int porta) {
 		try {
 			cliente = new Socket(ip, porta);
+
+/*
+ *  1 - estabelecer uma conexao
+ *  2 - conversar
+ *  3 - linguagem (protocolo): "0- desligar,  1 -ligar, 2- alterar "
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ */
+			
+			
 			System.out.println("Cliente conectado no  Endereço: " + ip
 					+ " e na porta: " + porta);
 		} catch (IOException ex) {
@@ -90,17 +110,28 @@ public class Principal {
 		});
 		mnGerenciar.add(mntmSair);
 
-		JMenuItem cadastrar = new JMenuItem("cadastrar");
-		cadastrar.addActionListener(new ActionListener() {
+		JMenuItem cadastrarUsuario = new JMenuItem("cadastrar Usuário");
+		cadastrarUsuario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
-				Cadastro dialog = new Cadastro();
+				CadastroUsuario dialog = new CadastroUsuario();
 				dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 				dialog.setVisible(true);
 			}
 		});
 
-		mnGerenciar.add(cadastrar);
+		mnGerenciar.add(cadastrarUsuario);
+		
+		JMenuItem cadastrarSala = new JMenuItem("cadastrar Sala");
+		cadastrarSala.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				CadastroSala dialog = new CadastroSala();
+				dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+				dialog.setVisible(true);
+			}
+		});
+
+		mnGerenciar.add(cadastrarSala);
 
 		JMenu mnAjuda = new JMenu("Ajuda");
 		menuBar.add(mnAjuda);
@@ -114,104 +145,24 @@ public class Principal {
 		panel.setBounds(10, 11, 1336, 398);
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(493, 43, 348, 325);
+		panel.add(scrollPane);
+		
+		table = new JTable();
+		table.setFont(new Font("Tahoma", Font.PLAIN, 14));
+	
 
-		JPanel panel_2 = new JPanel();
-		panel_2.setBounds(68, 98, 199, 98);
-		panel.add(panel_2);
-		panel_2.setLayout(null);
 
-		JLabel lblSala = new JLabel("Sala 1");
-		lblSala.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblSala.setBounds(72, 11, 70, 28);
-		panel_2.add(lblSala);
-
-		JButton btnOn = new JButton("Ligar");
-		btnOn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				String opcao = "ligar";
-				// iniciarCliente("127.0.0.1", 3320);
-
-				JOptionPane.showMessageDialog(null, opcao);
-			}
-		});
-		btnOn.setBounds(10, 50, 76, 23);
-		panel_2.add(btnOn);
-
-		JButton btnDesligar = new JButton("Desligar");
-		btnDesligar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				String opcao = "desligar";
-				// iniciarCliente("127.0.0.1", 3320);
-				JOptionPane.showMessageDialog(null, opcao);
-
-			}
-		});
-		btnDesligar.setBounds(96, 50, 93, 23);
-		panel_2.add(btnDesligar);
-
-		JPanel panel_3 = new JPanel();
-		panel_3.setLayout(null);
-		panel_3.setBounds(277, 98, 199, 98);
-		panel.add(panel_3);
-
-		JLabel lblSala_1 = new JLabel("Sala 2");
-		lblSala_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblSala_1.setBounds(72, 11, 70, 28);
-		panel_3.add(lblSala_1);
-
-		JButton button = new JButton("Ligar");
-		button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String opcao = "ligar";
-				// iniciarCliente("127.0.0.1", 3320);
-				JOptionPane.showMessageDialog(null, opcao);
-			}
-		});
-		button.setBounds(10, 50, 76, 23);
-		panel_3.add(button);
-
-		JButton button_1 = new JButton("Desligar");
-		button_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String opcao = "desligar";
-				// iniciarCliente("127.0.0.1", 3320);
-				JOptionPane.showMessageDialog(null, opcao);
-			}
-		});
-		button_1.setBounds(96, 50, 93, 23);
-		panel_3.add(button_1);
-
-		JPanel panel_4 = new JPanel();
-		panel_4.setLayout(null);
-		panel_4.setBounds(486, 98, 199, 98);
-		panel.add(panel_4);
-
-		JLabel lblSala_2 = new JLabel("Sala 3");
-		lblSala_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblSala_2.setBounds(72, 11, 70, 28);
-		panel_4.add(lblSala_2);
-
-		JButton button_2 = new JButton("Ligar");
-		button_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String opcao = "ligar";
-				// iniciarCliente("127.0.0.1", 3320);
-				JOptionPane.showMessageDialog(null, opcao);
-			}
-		});
-		button_2.setBounds(10, 50, 76, 23);
-		panel_4.add(button_2);
-
-		JButton button_3 = new JButton("Desligar");
-		button_3.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String opcao = "desligar";
-				// iniciarCliente("127.0.0.1", 3320);
-				JOptionPane.showMessageDialog(null, opcao);
-			}
-		});
-		button_3.setBounds(96, 50, 93, 23);
-		panel_4.add(button_3);
+		
+		SalaDAO sDAO = new SalaDAO();
+		List<Sala> salas = sDAO.buscarTodos();
+		
+		table.setModel(new SalaTableModel(salas));
+		
+		scrollPane.setViewportView(table);
+		
 
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(Color.LIGHT_GRAY);
@@ -236,14 +187,6 @@ public class Principal {
 		btnEnviar.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent arg0) {
-
-				try {
-					ServerSocket server = new ServerSocket(3320);
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
 				String opcao = "ligar";
 				iniciarCliente("127.0.0.1", 3320);
 
