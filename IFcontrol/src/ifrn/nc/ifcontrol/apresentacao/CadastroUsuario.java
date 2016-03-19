@@ -47,11 +47,13 @@ public class CadastroUsuario extends JDialog {
 	 * Create the dialog.
 	 */
 	public CadastroUsuario() {
+		setTitle("IFar-control");
 		setBounds(100, 100, 450, 392);
 		setLocationRelativeTo(null);
 		setResizable(false);
 		setModal(true);
 		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setBackground(new Color(173, 255, 47));
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
@@ -63,7 +65,7 @@ public class CadastroUsuario extends JDialog {
 		}
 		{
 			JPanel panel = new JPanel();
-			panel.setBackground(Color.LIGHT_GRAY);
+			panel.setBackground(new Color(255, 0, 0));
 			panel.setBounds(49, 54, 351, 225);
 			contentPanel.add(panel);
 			panel.setLayout(null);
@@ -123,6 +125,18 @@ public class CadastroUsuario extends JDialog {
 			JComboBox comboBox = new JComboBox(perfil);
 			comboBox.setBounds(120, 133, 109, 20);
 			panel.add(comboBox);
+		}
+		{
+			JPanel panel = new JPanel();
+			panel.setBackground(new Color(255, 0, 0));
+			panel.setBounds(0, 0, 444, 10);
+			contentPanel.add(panel);
+		}
+		{
+			JPanel panel = new JPanel();
+			panel.setBackground(new Color(255, 0, 0));
+			panel.setBounds(0, 320, 444, 10);
+			contentPanel.add(panel);
 		}
 		{
 			JPanel buttonPane = new JPanel();

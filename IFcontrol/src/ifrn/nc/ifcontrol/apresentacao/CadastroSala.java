@@ -15,6 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import java.awt.Color;
 
 public class CadastroSala extends JDialog {
 
@@ -39,42 +40,65 @@ public class CadastroSala extends JDialog {
 	 * Create the dialog.
 	 */
 	public CadastroSala() {
+		setTitle("IFar-control");
 		setBounds(100, 100, 300, 300);
 		setLocationRelativeTo(null);
 		setResizable(false);
 		setModal(true);
 		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setBackground(new Color(173, 255, 47));
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		{
-			JLabel lblIp = new JLabel("IP:");
-			lblIp.setFont(new Font("Tahoma", Font.PLAIN, 14));
-			lblIp.setBounds(33, 71, 57, 27);
-			contentPanel.add(lblIp);
+			JPanel panel = new JPanel();
+			panel.setBackground(new Color(255, 0, 0));
+			panel.setBounds(0, 75, 294, 87);
+			contentPanel.add(panel);
+			panel.setLayout(null);
+			{
+				JLabel lblIp = new JLabel("IP:");
+				lblIp.setForeground(new Color(255, 255, 255));
+				lblIp.setBounds(10, 0, 57, 27);
+				panel.add(lblIp);
+				lblIp.setFont(new Font("Tahoma", Font.BOLD, 15));
+			}
+			
+					textIp = new JTextField();
+					textIp.setBounds(87, 5, 158, 20);
+					panel.add(textIp);
+					textIp.setColumns(10);
+					{
+						JLabel lblNome = new JLabel("Nome:");
+						lblNome.setForeground(new Color(255, 255, 255));
+						lblNome.setBounds(10, 49, 57, 27);
+						panel.add(lblNome);
+						lblNome.setFont(new Font("Tahoma", Font.BOLD, 15));
+					}
+					
+							textNome = new JTextField();
+							textNome.setBounds(87, 54, 158, 20);
+							panel.add(textNome);
+							textNome.setColumns(10);
 		}
 		{
-			JLabel lblNome = new JLabel("Nome:");
-			lblNome.setFont(new Font("Tahoma", Font.PLAIN, 14));
-			lblNome.setBounds(33, 109, 57, 27);
-			contentPanel.add(lblNome);
+			JPanel panel = new JPanel();
+			panel.setBackground(Color.RED);
+			panel.setBounds(0, 228, 294, 10);
+			contentPanel.add(panel);
 		}
-
-		textIp = new JTextField();
-		textIp.setBounds(100, 76, 158, 20);
-		contentPanel.add(textIp);
-		textIp.setColumns(10);
-
-		textNome = new JTextField();
-		textNome.setColumns(10);
-		textNome.setBounds(100, 114, 158, 20);
-		contentPanel.add(textNome);
+		{
+			JPanel panel = new JPanel();
+			panel.setBackground(Color.RED);
+			panel.setBounds(0, 0, 294, 10);
+			contentPanel.add(panel);
+		}
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton okButton = new JButton("OK");
+				JButton okButton = new JButton("Cadastrar");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 

@@ -12,6 +12,7 @@ import javax.swing.JPasswordField;
 import java.awt.Color;
 import javax.swing.JButton;
 import java.awt.Dialog.ModalExclusionType;
+import java.awt.Font;
 
 public class Login extends JFrame {
 
@@ -50,7 +51,7 @@ public class Login extends JFrame {
 		setBounds(100, 100, 450, 300);
 		setLocationRelativeTo(null);
 		contentPane = new JPanel();
-		contentPane.setBackground(Color.GRAY);
+		contentPane.setBackground(new Color(173, 255, 47));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -60,16 +61,20 @@ public class Login extends JFrame {
 		contentPane.add(lblLogin);
 
 		JPanel panel = new JPanel();
-		panel.setBackground(Color.LIGHT_GRAY);
+		panel.setBackground(new Color(255, 0, 0));
 		panel.setBounds(86, 43, 254, 170);
 		contentPane.add(panel);
 		panel.setLayout(null);
 
-		JLabel lblUs = new JLabel("Usu\u00E1rio");
-		lblUs.setBounds(20, 36, 59, 17);
+		JLabel lblUs = new JLabel("Usu\u00E1rio:");
+		lblUs.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblUs.setForeground(new Color(255, 255, 255));
+		lblUs.setBounds(20, 36, 71, 17);
 		panel.add(lblUs);
 
-		JLabel lblSenha = new JLabel("Senha");
+		JLabel lblSenha = new JLabel("Senha:");
+		lblSenha.setForeground(new Color(255, 255, 255));
+		lblSenha.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblSenha.setBounds(20, 84, 59, 17);
 		panel.add(lblSenha);
 
@@ -85,5 +90,15 @@ public class Login extends JFrame {
 		JButton btnEntrar = new JButton("Entrar");
 		btnEntrar.setBounds(135, 125, 74, 30);
 		panel.add(btnEntrar);
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBackground(Color.RED);
+		panel_1.setBounds(0, 261, 444, 10);
+		contentPane.add(panel_1);
+		
+		JPanel panel_2 = new JPanel();
+		panel_2.setBackground(Color.RED);
+		panel_2.setBounds(0, 0, 444, 10);
+		contentPane.add(panel_2);
 	}
 }
