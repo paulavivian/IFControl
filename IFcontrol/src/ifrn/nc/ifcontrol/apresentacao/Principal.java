@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -30,6 +31,12 @@ import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
 import javax.swing.JTable;
+import javax.swing.SpinnerModel;
+import java.awt.SystemColor;
+import javax.swing.UIManager;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JTextField;
 
 public class Principal {
 
@@ -37,26 +44,21 @@ public class Principal {
 
 	private Socket cliente;
 	private JTable table;
-
+	
+	
+	
+	private List<String> temps = new ArrayList<String>();
+	private String temp;
+    
 	// ===============================================//
 	public void iniciarCliente(String ip, int porta) {
 		try {
 			cliente = new Socket(ip, porta);
 
-/*
- *  1 - estabelecer uma conexao
- *  2 - conversar
- *  3 - linguagem (protocolo): "0- desligar,  1 -ligar, 2- alterar "
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- */
-			
-			
+			/*
+			 * 1 - estabelecer uma conexao 2 - conversar 3 - linguagem
+			 * (protocolo): "0- desligar,  1 -ligar, 2- alterar "
+			 */
 			System.out.println("Cliente conectado no  Endereço: " + ip
 					+ " e na porta: " + porta);
 		} catch (IOException ex) {
@@ -91,12 +93,15 @@ public class Principal {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.getContentPane().setBackground(new Color(173, 255, 47));
+		frame.setBackground(new Color(124, 252, 0));
 		frame.setExtendedState(Frame.MAXIMIZED_BOTH);
 		frame.setResizable(true);
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		JMenuBar menuBar = new JMenuBar();
+		menuBar.setBackground(new Color(255, 0, 0));
 		frame.setJMenuBar(menuBar);
 
 		JMenu mnGerenciar = new JMenu("Gerenciar");
@@ -121,7 +126,7 @@ public class Principal {
 		});
 
 		mnGerenciar.add(cadastrarUsuario);
-		
+
 		JMenuItem cadastrarSala = new JMenuItem("cadastrar Sala");
 		cadastrarSala.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -141,75 +146,84 @@ public class Principal {
 		frame.getContentPane().setLayout(null);
 
 		JPanel panel = new JPanel();
-		panel.setBackground(Color.GRAY);
-		panel.setBounds(10, 11, 1336, 398);
+		panel.setBorder(new EmptyBorder(10, 10, 10, 10));
+		panel.setBackground(new Color(255, 0, 0));
+		panel.setBounds(0, 123, 1393, 398);
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);
-		
+
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(493, 43, 348, 325);
+		scrollPane.setBackground(SystemColor.text);
+		scrollPane.setBounds(715, 25, 413, 325);
 		panel.add(scrollPane);
-		
-		table = new JTable();
-		table.setFont(new Font("Tahoma", Font.PLAIN, 14));
-	
 
-
-		
 		SalaDAO sDAO = new SalaDAO();
 		List<Sala> salas = sDAO.buscarTodos();
 		
-		table.setModel(new SalaTableModel(salas));
+				table = new JTable();
+				table.setBounds(39, 37, 134, 80);
+				panel.add(table);
+				table.setForeground(new Color(0, 0, 0));
+				table.setFont(new Font("Tahoma", Font.BOLD, 15));
+				String[] listOnOff = { "Liga", "Desliga" };
+						table.setModel(new SalaTableModel(salas));
+						JComboBox ComboBox = new JComboBox(listOnOff);
+						ComboBox.setBounds(715, 361, 75, 20);
+						panel.add(ComboBox);
+						
+						JLabel lblTemperatura = new JLabel("Temperatura:");
+						lblTemperatura.setBounds(816, 361, 85, 20);
+						panel.add(lblTemperatura);
+						
+						JLabel lblC = new JLabel("C\u00B0");
+						lblC.setBounds(953, 361, 46, 20);
+						panel.add(lblC);
+						
+						JButton btnOk = new JButton("OK");
+						btnOk.setBounds(976, 361, 59, 26);
+						panel.add(btnOk);
+						JSpinner spinner = new JSpinner();
+						spinner.setBounds(903, 361, 46, 20);
+						panel.add(spinner);
+						
+								JButton btnEnviar = new JButton("Liga/Desliga");
+								btnEnviar.setBounds(380, 351, 124, 41);
+								panel.add(btnEnviar);
+								
+										btnEnviar.addActionListener(new ActionListener() {
+								
+											public void actionPerformed(ActionEvent arg0) {
+												String opcao = "sala_1";
+								
+												String comando = "123";
+								
+												iniciarCliente("192.168.43.151", 1234);
+								
+												// JOptionPane.showMessageDialog(null, opcao);
+								
+												try {
+													PrintStream saida = new PrintStream(cliente
+															.getOutputStream());
+													saida.println(opcao);
+												} catch (IOException ex) {
+													System.out.println("Erro ao ligar");
+												}
+												try {
+													cliente.close();
+													System.out.println("Cliente desconectado!");
+												} catch (IOException ex) {
+													System.out.println("Erro ao fechar");
+												}
+											}
+								
+											// ===================================//
+								
+										});
+
 		
-		scrollPane.setViewportView(table);
-		
 
-		JPanel panel_1 = new JPanel();
-		panel_1.setBackground(Color.LIGHT_GRAY);
-		panel_1.setBounds(10, 419, 1336, 254);
-		frame.getContentPane().add(panel_1);
-		panel_1.setLayout(null);
-
-		String[] listOnOff = { "Liga", "Desliga" };
-		JComboBox ComboBox = new JComboBox(listOnOff);
-
-		ComboBox.setBounds(184, 60, 75, 20);
-		panel_1.add(ComboBox);
-
-		JSpinner spinner = new JSpinner();
-		spinner.setBounds(120, 60, 44, 20);
-		panel_1.add(spinner);
-
-		JButton btnEnviar = new JButton("Liga/Desliga");
-		btnEnviar.setBounds(383, 50, 124, 41);
-		panel_1.add(btnEnviar);
-
-		btnEnviar.addActionListener(new ActionListener() {
-
-			public void actionPerformed(ActionEvent arg0) {
-				String opcao = "ligar";
-				iniciarCliente("127.0.0.1", 3320);
-
-				JOptionPane.showMessageDialog(null, opcao);
-
-				try {
-					PrintStream saida = new PrintStream(cliente
-							.getOutputStream());
-					saida.println(opcao);
-				} catch (IOException ex) {
-					System.out.println("Erro ao ligar");
-				}
-				try {
-					cliente.close();
-					System.out.println("Cliente desconectado!");
-				} catch (IOException ex) {
-					System.out.println("Erro ao fechar");
-				}
-			}
-
-			// ===================================//
-
-		});
+	  temps.add("1");
+	  temps.add("2");
 
 	}
 }

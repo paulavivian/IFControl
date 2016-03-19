@@ -38,7 +38,6 @@ public class CadastroUsuario extends JDialog {
 			CadastroUsuario dialog = new CadastroUsuario();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -134,17 +133,11 @@ public class CadastroUsuario extends JDialog {
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						Usuario u = new Usuario();
-						
 						u.setNome(textUsuario.getText());
 						u.setMatricula(textMatricula.getText());
 						u.setSenha(textSenha.getText());
 						UsuarioDAO ud = new UsuarioDAO();
 						ud.Inserir(u);
-						
-			
-						
-						
-						
 					}
 				});
 				okButton.setActionCommand("OK");
