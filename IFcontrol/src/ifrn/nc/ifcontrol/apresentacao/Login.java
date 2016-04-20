@@ -13,6 +13,7 @@ import java.awt.Color;
 import javax.swing.JButton;
 import java.awt.Dialog.ModalExclusionType;
 import java.awt.Font;
+import java.awt.SystemColor;
 
 public class Login extends JFrame {
 
@@ -51,7 +52,7 @@ public class Login extends JFrame {
 		setBounds(100, 100, 450, 300);
 		setLocationRelativeTo(null);
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color(173, 255, 47));
+		contentPane.setBackground(Color.GRAY);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -61,7 +62,7 @@ public class Login extends JFrame {
 		contentPane.add(lblLogin);
 
 		JPanel panel = new JPanel();
-		panel.setBackground(new Color(255, 0, 0));
+		panel.setBackground(SystemColor.activeCaption);
 		panel.setBounds(86, 43, 254, 170);
 		contentPane.add(panel);
 		panel.setLayout(null);
@@ -92,12 +93,12 @@ public class Login extends JFrame {
 		panel.add(btnEntrar);
 		
 		JPanel panel_1 = new JPanel();
-		panel_1.setBackground(Color.RED);
+		panel_1.setBackground(SystemColor.activeCaption);
 		panel_1.setBounds(0, 261, 444, 10);
 		contentPane.add(panel_1);
 		
 		JPanel panel_2 = new JPanel();
-		panel_2.setBackground(Color.RED);
+		panel_2.setBackground(SystemColor.activeCaption);
 		panel_2.setBounds(0, 0, 444, 10);
 		contentPane.add(panel_2);
 	}

@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
+import java.awt.SystemColor;
 
 public class CadastroSala extends JDialog {
 
@@ -46,13 +47,13 @@ public class CadastroSala extends JDialog {
 		setResizable(false);
 		setModal(true);
 		getContentPane().setLayout(new BorderLayout());
-		contentPanel.setBackground(new Color(173, 255, 47));
+		contentPanel.setBackground(Color.GRAY);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		{
 			JPanel panel = new JPanel();
-			panel.setBackground(new Color(255, 0, 0));
+			panel.setBackground(SystemColor.activeCaption);
 			panel.setBounds(0, 75, 294, 87);
 			contentPanel.add(panel);
 			panel.setLayout(null);
@@ -83,13 +84,13 @@ public class CadastroSala extends JDialog {
 		}
 		{
 			JPanel panel = new JPanel();
-			panel.setBackground(Color.RED);
+			panel.setBackground(SystemColor.activeCaption);
 			panel.setBounds(0, 228, 294, 10);
 			contentPanel.add(panel);
 		}
 		{
 			JPanel panel = new JPanel();
-			panel.setBackground(Color.RED);
+			panel.setBackground(SystemColor.activeCaption);
 			panel.setBounds(0, 0, 294, 10);
 			contentPanel.add(panel);
 		}

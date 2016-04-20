@@ -21,6 +21,7 @@ import javax.swing.JComboBox;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.SystemColor;
 
 public class CadastroUsuario extends JDialog {
 
@@ -53,7 +54,7 @@ public class CadastroUsuario extends JDialog {
 		setResizable(false);
 		setModal(true);
 		getContentPane().setLayout(new BorderLayout());
-		contentPanel.setBackground(new Color(173, 255, 47));
+		contentPanel.setBackground(Color.GRAY);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
@@ -65,7 +66,7 @@ public class CadastroUsuario extends JDialog {
 		}
 		{
 			JPanel panel = new JPanel();
-			panel.setBackground(new Color(255, 0, 0));
+			panel.setBackground(SystemColor.activeCaption);
 			panel.setBounds(49, 54, 351, 225);
 			contentPanel.add(panel);
 			panel.setLayout(null);
@@ -128,13 +129,13 @@ public class CadastroUsuario extends JDialog {
 		}
 		{
 			JPanel panel = new JPanel();
-			panel.setBackground(new Color(255, 0, 0));
+			panel.setBackground(SystemColor.activeCaption);
 			panel.setBounds(0, 0, 444, 10);
 			contentPanel.add(panel);
 		}
 		{
 			JPanel panel = new JPanel();
-			panel.setBackground(new Color(255, 0, 0));
+			panel.setBackground(SystemColor.activeCaption);
 			panel.setBounds(0, 320, 444, 10);
 			contentPanel.add(panel);
 		}

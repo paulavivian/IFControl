@@ -28,6 +28,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.JTable;
@@ -35,6 +36,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JEditorPane;
 
 import java.awt.Label;
+import java.awt.SystemColor;
 
 public class Principal {
 
@@ -95,7 +97,7 @@ public class Principal {
 
 		frmIfarcontrol.setIconImage(Toolkit.getDefaultToolkit().getImage(
 				"img\\logo.png"));
-		frmIfarcontrol.getContentPane().setBackground(new Color(173, 255, 47));
+		frmIfarcontrol.getContentPane().setBackground(Color.GRAY);
 		frmIfarcontrol.setBackground(new Color(124, 252, 0));
 		frmIfarcontrol.setExtendedState(Frame.MAXIMIZED_BOTH);
 		frmIfarcontrol.setResizable(true);
@@ -103,7 +105,7 @@ public class Principal {
 		frmIfarcontrol.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		JMenuBar menuBar = new JMenuBar();
-		menuBar.setBackground(new Color(255, 0, 0));
+		menuBar.setBackground(SystemColor.activeCaption);
 		frmIfarcontrol.setJMenuBar(menuBar);
 
 		JMenu mnGerenciar = new JMenu("Gerenciar");
@@ -149,7 +151,7 @@ public class Principal {
 
 		JPanel panel = new JPanel();
 		panel.setBorder(new EmptyBorder(10, 10, 10, 10));
-		panel.setBackground(new Color(255, 0, 0));
+		panel.setBackground(SystemColor.activeCaption);
 		panel.setBounds(0, 123, 1393, 398);
 		frmIfarcontrol.getContentPane().add(panel);
 		panel.setLayout(null);
@@ -164,7 +166,8 @@ public class Principal {
 		table.setFont(new Font("Tahoma", Font.BOLD, 15));
 		String[] listOnOff = { "Liga", "Desliga" };
 		table.setModel(new SalaTableModel(salas));
-		JComboBox ComboBox = new JComboBox(listOnOff);
+		final JComboBox ComboBox = new JComboBox(listOnOff);
+
 		ComboBox.setBounds(715, 361, 75, 20);
 		panel.add(ComboBox);
 
@@ -221,14 +224,14 @@ public class Principal {
 		btnEnviar.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent arg0) {
+
+				String valor = (String) (ComboBox.getSelectedItem());			
 				String opcao = "sala_1";
-
-				String comando = "123";
-
+				// String comando = "123";
+					
 				iniciarCliente("192.168.43.151", 1234);
-
-				// JOptionPane.showMessageDialog(null, opcao);
-
+				if(valor == "ligar"){
+					JOptionPane.showMessageDialog(null, valor);
 				try {
 					PrintStream saida = new PrintStream(cliente
 							.getOutputStream());
@@ -243,13 +246,13 @@ public class Principal {
 					System.out.println("Erro ao fechar");
 				}
 			}
-
+			}
 			// ===================================//
 
 		});
 
 		JPanel panel_1 = new JPanel();
-		panel_1.setBackground(new Color(255, 0, 0));
+		panel_1.setBackground(SystemColor.activeCaption);
 		panel_1.setBounds(0, 662, 1376, 22);
 		frmIfarcontrol.getContentPane().add(panel_1);
 
