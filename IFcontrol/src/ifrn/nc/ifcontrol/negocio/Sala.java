@@ -7,6 +7,8 @@ public class Sala {
 
 	public Sala() {
 
+		//teste
+
 	}
 
 	public Sala(String ip, String nome) {
