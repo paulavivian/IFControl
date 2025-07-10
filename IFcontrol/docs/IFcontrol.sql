@@ -9,3 +9,6 @@ create table Sala(
 Select * from Sala;
 delete from Sala;
 describe Sala;
+
+
+###teste
